@@ -6,3 +6,22 @@ References
 Williams KD, Webb MJ (2009) A quantitative performance assessment of cloud regimes in climate models. Clim Dyn 33(1):141–157
 
 Tsushima Y, Ringer MA, Webb MJ, Williams KD (2012) Quantitative evaluation of the seasonal variations in climate model cloud regimes. Clim Dyn 41(9-10):2679-2696
+
+Input
+----------
+
+| Frequency | Variable | CMOR labels | Unit | File Format |
+|:----------|:-----------------------------|:-------------|:------|:------------|
+| daily mean | ISCCP mean cloud top pressure | pctisccp     | Pa    | nc
+|  | ISCCP mean cloud albedo | albisccp     |  1    | nc
+|  | Total cloud cover simulating ISCCP | cltisccp     |  %    | nc
+|  | Surface snow area fraction | snc     |  %    | nc
+|  | Sea ice area fraction  | sic     |  1    | nc
+|  | Outgoing shortwave flux at the top-of-the-atmosphere(TOA)  | rsut     |  Wm-2    | nc
+|  | TOA outgoing longwave flux  | rlut     |  Wm-2    | nc
+|  | TOA outgoing shortwave flux assuming clear-sky | rsutcs     |  Wm-2    | nc
+|  | TOA outgoing longwave flux assuming clear-sky | rsutcs     |  Wm-2    | nc
+
+Output
+----------
+Single value texts of Statistical mean of daily mean CREMpd [Wm-2]
