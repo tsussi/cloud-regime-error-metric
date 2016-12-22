@@ -22,11 +22,13 @@ Input
 |  | TOA outgoing shortwave flux assuming clear-sky | rsutcs     |  Wm-2    | nc
 |  | TOA outgoing longwave flux assuming clear-sky | rsutcs     |  Wm-2    | nc
 
-Link to the observations if they are expected in the code
+Link to the observations (if they are expected in the code):
+
+Monthly ISCCP data: http://climserv.ipsl.polytechnique.fr/cfmip-obs/
 
 Output
 ----------
 Single value texts of Statistical mean of daily mean CREMpd [Wm-2]
 
  
-A script to draw the figure?: No
+Is a script to draw a figure in the paper included ?: No
