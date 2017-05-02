@@ -32,3 +32,7 @@ Single value texts of Statistical mean of daily mean CREMpd [Wm-2]
 
  
 Is a script to draw a figure in the paper included ?: No
+
+Note:
+Please set fixmdis=False, in case the program fails.
+
