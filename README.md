@@ -30,9 +30,13 @@ Output
 ----------
 Single value texts of Statistical mean of daily mean CREMpd [Wm-2]
 
+Sample input data files are provided under 'data' directory.
+For the provided sample input data, the code should print the following output. 
+
+CREMpd:  1.48043313223
  
 Is a script to draw a figure in the paper included ?: No
-
+----------
 Note
 ----------
 Please set fixmdis=False, in case the program fails.
