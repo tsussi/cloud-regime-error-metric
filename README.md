@@ -21,10 +21,16 @@ Input
 |  | TOA outgoing longwave flux  | rlut     |  Wm-2    | nc
 |  | TOA outgoing shortwave flux assuming clear-sky | rsutcs     |  Wm-2    | nc
 |  | TOA outgoing longwave flux assuming clear-sky | rsutcs     |  Wm-2    | nc
+|  | TOA Incident Shortwave Radiation*  | rsdt     |  Wm-2    | nc
 
-Link to the observations (if they are expected in the code):
+*rsdt is necessary only for CREM for the climatological annual variation in Tsushima et al.,(2013).
 
-Monthly ISCCP data: http://climserv.ipsl.polytechnique.fr/cfmip-obs/
+
+The reference properties of observational cloud regimes were estimated using the following data:
+
+Daily ISCCP data: https://eosweb.larc.nasa.gov/project/isccp/isccp_d1_table
+
+ISCCP-FD Daily radiative flux data: https://isccp.giss.nasa.gov/outgoing/FLUX/TOA/ 
 
 Output
 ----------
