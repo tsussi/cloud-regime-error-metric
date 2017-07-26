@@ -1,0 +1,92 @@
+region=['2020','exts','extn','icey']
+refrgn=['2020','extra','extra','icey']
+nregimes=[7,7,7,6]
+
+model_names=['MOHC','CCCma','CNRM-CERFACS','MRI','MIROC']
+models=['HadGEM2-A','CanAM4','CNRM-CM5','MRI-CGCM3','MIROC5']
+versions=['v20111105','v2','v20120203','v1','v20120201']
+period1=['19780901','19790101','19790101','19790101','19790101']
+period2=['20081230','19791231','20081231','20100228','20081231']
+
+nmodels=n_elements(models)
+print, 'nmodels',nmodels
+
+nregions=n_elements(region)
+print, 'nregions',nregions
+
+; HadGEM2 does not provide isicemask data
+;for m=0,nmodels-1 do begin
+for m=1,1 do begin
+;tgice
+if (m eq 0) then tgice='/data/local/hadyt/cloud_cluster/isccpd1/isicemask.pp'
+if (m ne 0) then tgice='/data/local/hadyt/cloud_cluster/cmip5/'+models(m)+'/sicsncmask.pp'
+tgalbis=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/albisccp_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgpctis=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/pctisccp_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgcltis=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/cltisccp_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgrsdt=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/rsdt_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgnrsdt=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/rsdt_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgtsw=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/rsut_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgtlw=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/rlut_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgcsw=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/rsutcs_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+tgclw=ncassoc('/data/local2/hadyt/cmip5/'+models(m)+'/rlutcs_cfDay_'+models(m)+'_amip_r1i1p1_'+period1(m)+'-'+period2(m)+'.nc',/ignore)
+;tge=ss_assoc('/project/earthobs/ISCCP_FD/daily/',SS(fromdt=[1985,3],todt=[1990,3]))
+;for r=0,2 do begin
+for r=0,0 do begin
+  cldarr=fltarr(49,nregimes(r))
+  npts=fltarr(nregimes(r))
+  snregimes=strcompress(string(nregimes(r)),/remove_all)
+  reffile='/data/cr1/hadke/cluster/approx_version/fuzzy_2d/global_2d_isccp_nclusters'+snregimes+'_'+refrgn(r)+'.data'
+
+  openw,2,region(r)+'_onto_isccp.frac'
+  openw,3,region(r)+'_onto_isccp.alb'
+  openw,4,region(r)+'_onto_isccp.nctp'
+  openw,5,region(r)+'_onto_isccp.clt'
+  openw,6,region(r)+'_onto_isccp.swcf'
+  openw,7,region(r)+'_onto_isccp.lwcf'
+  openw,8,region(r)+'_onto_isccp.albf'
+  openw,9,region(r)+'_onto_isccp.nswcf'
+  openw,16,region(r)+'_onto_isccp.swcffrac'
+  openw,17,region(r)+'_onto_isccp.lwcffrac'
+  openw,18,region(r)+'_onto_isccp.albffrac'
+  openw,19,region(r)+'_onto_isccp.nswcffrac'
+
+for mon=1,12 do begin
+print, 'mon',mon
+  fuzzy_project_onto_clusters_2d_ncdf_mon, tgalbis=tgalbis, tgpctis=tgpctis, tgcltis=tgcltis, $
+         tgrsdt=tgrsdt, tgnrsdt=tgnrsdt, tgtsw=tgtsw, tgtlw=tgtlw, tgcsw=tgcsw, tgclw=tgclw, $
+         tgice=tgice, reffile=reffile, refnseed=nregimes(r), $
+	 regs=region(r), /regrid, diagcode='cfmip', mon=mon, $
+         count_out=count_out, awo=awo, swcf_clu=swcf_clu, lwcf_clu=lwcf_clu, $
+	 albf_clu=albf_clu, nswcf_clu=nswcf_clu, arr_out=arr_out, locate=locate, $
+	 location_map=location_map  
+
+    printf, format='(7(F10.3))',2,awo
+    printf, format='(7(F10.3))',3,arr_out(0,0),arr_out(0,1),arr_out(0,2),arr_out(0,3),arr_out(0,4),arr_out(0,5),arr_out(0,6)
+    printf, format='(7(F10.3))',4,arr_out(1,0),arr_out(1,1),arr_out(1,2),arr_out(1,3),arr_out(1,4),arr_out(1,5),arr_out(1,6)
+    printf, format='(7(F10.3))',5,arr_out(2,0),arr_out(2,1),arr_out(2,2),arr_out(2,3),arr_out(2,4),arr_out(2,5),arr_out(2,6)
+    printf, format='(7(F10.3))',6,swcf_clu
+    printf, format='(7(F10.3))',7,lwcf_clu
+    printf, format='(7(F10.3))',8,albf_clu
+    printf, format='(7(F10.3))',9,nswcf_clu
+    printf, format='(7(F10.3))',16,swcf_clu*awo
+    printf, format='(7(F10.3))',17,lwcf_clu*awo
+    printf, format='(7(F10.3))',18,albf_clu*awo
+    printf, format='(7(F10.3))',19,nswcf_clu*awo
+  mon_char=strcompress(string(mon),/remove)
+  
+endfor
+close,2
+close,3
+close,4
+close,5
+close,6
+close,7
+close,8
+close,9
+close,16
+close,17
+close,18
+close,19
+endfor
+endfor
+end

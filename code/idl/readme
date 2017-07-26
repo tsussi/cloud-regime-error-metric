@@ -1,0 +1,2 @@
+In fuzzy_project_onto_clusters_2d_ncdf_mon.pro,
+You have to edit this file and modify the data period (currently it is from [1979,1,1] to [1979,12,31]).
