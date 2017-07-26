@@ -55,7 +55,7 @@ CREMpd:  1.48043313223
 ### B. Climatological Annual Variation
 
 #### 1. Calculate cloud regime properties for climatological months: 
-**Program**: script_for_2dproject_cmip5_mon.pro and fuzzy_project_onto_clusters_2d_ncdf_mon.pro (idl)
+**Program**: A script 'run_amip' let 'script_for_2dproject_cmip5_mon.pro' run 'fuzzy_project_onto_clusters_2d_ncdf_mon.pro' (idl)
 
 **Input data**: CMIP model data
     
