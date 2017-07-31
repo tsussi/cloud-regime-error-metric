@@ -46,7 +46,7 @@ Sample input model data files are provided under 'model_data' directory.
 
 For the provided sample input data, the code should print the following output. 
 
-CREMpd:  1.48043313223
+CREMpd:  1.097
 
 **Note**: Please set fixmdis=False, in case the program fails.
 
