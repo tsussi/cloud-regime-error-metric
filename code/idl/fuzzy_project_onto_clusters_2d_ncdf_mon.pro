@@ -171,12 +171,10 @@ if (diagcode eq 'isccp' or diagcode eq 'cfmip') then begin
   tauctp_data(2,*)=ppfield_data(index)
   ppfield_glob=pp_extract(pp_regrid(ppa(tgalbis,ss(from=[1979,1,1],to=[1979,12,31],monv=m),/all),get_size_glob),region_area)
   ppfield_alb=ppfield_glob
-  ppfield_glob=pp_ff('a/b*100.',ppfield_alb, ppfield_clt,/quiet)
   ppfield_data=ppfield_glob(*).data
   tauctp_data(0,*)=ppfield_data(index)
   ppfield_glob=pp_extract(pp_regrid(ppa(tgpctis,ss(from=[1979,1,1],to=[1979,12,31],monv=m),/all),get_size_glob),region_area)
   ppfield_pct=ppfield_glob
-  ppfield_glob=pp_ff('a/b*100.',ppfield_pct, ppfield_clt,/quiet)
 ;cloud top pressure in Pa.
   ppfield_glob=pp_ff('a/100000.',ppfield_glob,/quiet)
   ppfield_data=ppfield_glob(*).data
